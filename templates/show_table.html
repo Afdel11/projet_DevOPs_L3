@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réponses au Sondage</title>
+    
+    <link rel="stylesheet" href="nav.html">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 5px 15px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <a href="{{ url_for('admin') }}">Retour</a>
+    <h1>Réponses au Sondage</h1>
+
+    <!-- Formulaire pour filtrer par classe -->
+    <form method="GET" action="{{ url_for('show_table') }}">
+        <label for="class_name">Filtrer par classe:</label>
+        <select name="class_name" id="class_name">
+            <option value="">Toutes les classes</option>
+            <option value="Licence 1">Licence 1</option>
+            <option value="Licence 2">Licence 2</option>
+            <option value="Licence 3">Licence 3</option>
+            <option value="Master 1">Master 1</option>
+            <option value="Master 2">Master 2</option>
+            <!-- Ajoutez d'autres options pour vos classes -->
+        </select>
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <!-- Tableau pour afficher les réponses -->
+    <table>
+        <thead>
+            <tr>
+                <th>Classe</th>
+                <th>Matière</th>
+                <th>Commentaire</th>
+                <!-- Ajoutez d'autres colonnes si nécessaire -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for response in survey_responses %}
+            <tr>
+                <td>{{ response.class_name }}</td>
+                <td>{{ response.subject_name }}</td>
+                <td>{{ response.feedback }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form action="{{ url_for('reset_survey_responses') }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir réinitialiser tous les résultats ? Cette action est irréversible.')">
+        <button style="background-color: red;" type="submit">Réinitialiser les Résultats</button>
+    </form>
+</body>
+</html>

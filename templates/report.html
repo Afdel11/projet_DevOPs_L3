@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Final</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+   <a href="{{ url_for('admin') }}">Retour</a>
+    <h1>Rapport d’évaluation {{ matiere_name }} - {{ classe_name }}</h1>
+
+    <h3>1. Implication et Niveau de compétences des étudiants</h3>
+    <table>
+        <tr>
+            <th>Critère</th>
+            <th>Note Moyenne / 10</th>
+        </tr>
+        <tr>
+            <td>Niveau d'implication moyen</td>
+            <td>{{ avg_involvement }}</td>
+        </tr>
+        <tr>
+            <td>Niveau de compétences initiales moyen</td>
+            <td>{{ avg_initial_knowledge }}</td>
+        </tr>
+        <tr>
+            <td>Niveau de compétences actuel moyen</td>
+            <td>{{ avg_current_knowledge }}</td>
+        </tr>
+    </table>
+
+    <h3>2. Compétences du formateur</h3>
+    <table>
+        <tr>
+            <th>Critère</th>
+            <th>Note Moyenne / 10</th>
+        </tr>
+        <tr>
+            <td>Motivation et échanges avec le professeur</td>
+            <td>{{ avg_professor_motivation }}</td>
+        </tr>
+        <tr>
+            <td>Outils et méthodologies développés</td>
+            <td>{{ avg_tools_methodology }}</td>
+        </tr>
+        <tr>
+            <td>Exemples employés et exercices réalisés</td>
+            <td>{{ avg_examples_exercises }}</td>
+        </tr>
+        <tr>
+            <td>Pertinence et clarté des explications</td>
+            <td>{{ avg_explanations_clarity }}</td>
+        </tr>
+    </table>
+
+    <h3>3. Mesure de la capacité de mise en pratique des compétences acquises</h3>
+    
+    <table>
+        <tr>
+            <th>Critère</th>
+            <th>Pourcentage</th>
+        </tr>
+        <tr>
+            <td>Pourcentage des étudiants capables de mettre en pratique les compétences:</td>
+            <td>{{ (practical_skills_yes / responses_len) * 100 | round(2) }}%</td>
+        </tr>
+
+    </table>
+
+    <h3>4. Aspects du cours et Satisfaction générale</h3>
+    <table>
+        <tr>
+            <th>Critère</th>
+            <th>Note Moyenne / 10</th>
+        </tr>
+        <tr>
+            <td>Satisfaction avec l'organisation du cours</td>
+            <td>{{ (course_organization_yes/ responses_len)*10 | round(2) }}</td>
+        </tr>
+        <tr>
+            <td>Satisfaction générale moyenne</td>
+            <td>{{ avg_satisfaction_general }}</td>
+        </tr>
+    </table>
+
+    
+</body>
+</html>
+

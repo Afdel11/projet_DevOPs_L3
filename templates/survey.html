@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form method="POST" class="survey-form">
+            {{ form.hidden_tag() }}
+            <h1>Évaluation du cours</h1>
+            
+            <div class="form-group">
+                {{ form.involvement.label }}
+                <ul class="choice-list">
+                    {% for choice in form.involvement %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.involvement.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.involvement.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                {{ form.initial_knowledge.label }}
+                <ul class="choice-list">
+                    {% for choice in form.initial_knowledge %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.initial_knowledge.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.initial_knowledge.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.current_knowledge.label }}
+                <ul class="choice-list">
+                    {% for choice in form.current_knowledge %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.current_knowledge.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.current_knowledge.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.professor_motivation.label }}
+                <ul class="choice-list">
+                    {% for choice in form.professor_motivation %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.professor_motivation.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.professor_motivation.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.tools_methodology.label }}
+                <ul class="choice-list">
+                    {% for choice in form.tools_methodology %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.tools_methodology.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.tools_methodology.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.examples_exercises.label }}
+                <ul class="choice-list">
+                    {% for choice in form.examples_exercises %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.examples_exercises.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.examples_exercises.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.explanations_clarity.label }}
+                <ul class="choice-list">
+                    {% for choice in form.explanations_clarity %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.explanations_clarity.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.explanations_clarity.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.practical_skills.label }}
+                {{ form.practical_skills(class="select") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.course_organization.label }}
+                {{ form.course_organization(class="select") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.overall_satisfaction.label }}
+                <ul class="choice-list">
+                    {% for choice in form.overall_satisfaction %}
+                        <li>
+                            <input type="radio" id="{{ choice.id }}" name="{{ form.overall_satisfaction.name }}" value="{{ choice.data }}" style="display:none;">
+                            <button type="button" class="choice-button" onclick="selectChoice('{{ form.overall_satisfaction.name }}', '{{ choice.id }}')">{{ choice.label }}</button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="form-group">
+                {{ form.feedback.label }}
+                {{ form.feedback(class="textarea", cols=40, rows=5) }}
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="submit-button") }}
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function selectChoice(name, id) {
+            document.getElementById(id).checked = true;
+            document.querySelectorAll('input[name=' + name + ']').forEach(input => {
+                if (input.id !== id) {
+                    input.parentElement.querySelector('button').classList.remove('selected');
+                } else {
+                    input.parentElement.querySelector('button').classList.add('selected');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

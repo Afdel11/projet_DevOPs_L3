@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Administrateur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+    <link rel="stylesheet" href="nav.html">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    .form-container {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .form-container form {
+        display: inline-block;
+        margin-right: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    
+</style>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-brand">
+            <h3>Administration</h3>
+        </div>
+        <div class="navbar-links">
+            <a href="{{ url_for('home') }}">Accueil</a>
+            <a href="{{ url_for('change_credentials') }}">Modifier les identifiants</a>
+            <a href="{{ url_for('show_table') }}">Afficher les réponses du sondage</a>
+            <a style="color: rgba(255, 0, 0, 0.737);" href="{{ url_for('logout') }}">Se déconnecter</a>
+    
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Rapport</h2>
+
+        <form action="{{ url_for('generate_report') }}" method="post">
+            <label for="classe">Sélectionnez une classe :</label>
+            <select name="classe" id="classe" required>
+                {% for classe in classes %}
+                    <option value="{{ classe.nom }}">{{ classe.nom }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="matiere">Sélectionnez une matière :</label>
+            <select name="matiere" id="matiere" required>
+                {% for matiere in matieres %}
+                    <option value="{{ matiere.nom }}">{{ matiere.nom }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Générer le Rapport</button>
+        </form>
+
+        
+    </div>
+    <div class="container">
+        <h2>Gestion des Matières et Classes</h2>
+
+    <!-- Formulaire pour ajouter une matière -->
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('add_matiere') }}">
+            <label for="matiere_name">Ajouter une matière:</label>
+            <input type="text" name="matiere_name" id="matiere_name" required>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <!-- Formulaire pour supprimer une matière -->
+        <form method="POST" action="{{ url_for('delete_matiere') }}">
+            <label for="matiere_id">Supprimer une matière:</label>
+            <select name="matiere_id" id="matiere_id">
+                {% for matiere in matieres %}
+                <option value="{{ matiere.id }}">{{ matiere.nom }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Supprimer</button>
+        </form>
+    </div>
+
+    <!-- Formulaire pour ajouter une classe -->
+    <div class="form-container">
+        <form method="POST" action="{{ url_for('add_classe') }}">
+            <label for="classe_name">Ajouter une classe:</label>
+            <input type="text" name="classe_name" id="classe_name" required>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <!-- Formulaire pour supprimer une classe -->
+        <form method="POST" action="{{ url_for('delete_classe') }}">
+            <label for="classe_id">Supprimer une classe:</label>
+            <select name="classe_id" id="classe_id">
+                {% for classe in classes %}
+                <option value="{{ classe.id }}">{{ classe.nom }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Supprimer</button>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

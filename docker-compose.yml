@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "5004:5004"
+    volumes:
+      - .:/app
+      - db_data:/app/instance
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      - db
+
+  db:
+    image: busybox
+    volumes:
+      - db_data:/data
+    command: sleep infinity
+
+volumes:
+  db_data:

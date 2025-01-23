@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gérer les Classes et Matières</title>
+</head>
+<body>
+    <h2>Gérer les Classes et Matières</h2>
+    
+    <!-- Formulaire pour ajouter une classe -->
+    <form action="{{ url_for('manage_classe_matiere') }}" method="post">
+        <label for="new_classe">Ajouter une nouvelle classe :</label>
+        <input type="text" id="new_classe" name="new_classe" required>
+        <button type="submit" name="action" value="add_classe">Ajouter Classe</button>
+    </form>
+
+    <!-- Formulaire pour supprimer une classe -->
+    <form action="{{ url_for('manage_classe_matiere') }}" method="post">
+        <label for="classe">Supprimer une classe :</label>
+        <select name="classe" id="classe" required>
+            {% for classe in classes %}
+                <option value="{{ classe.nom }}">{{ classe.nom }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" name="action" value="delete_classe">Supprimer Classe</button>
+    </form>
+
+    <!-- Formulaire pour ajouter une matière -->
+    <form action="{{ url_for('manage_classe_matiere') }}" method="post">
+        <label for="new_matiere">Ajouter une nouvelle matière :</label>
+        <input type="text" id="new_matiere" name="new_matiere" required>
+        <button type="submit" name="action" value="add_matiere">Ajouter Matière</button>
+    </form>
+
+    <!-- Formulaire pour supprimer une matière -->
+    <form action="{{ url_for('manage_classe_matiere') }}" method="post">
+        <label for="matiere">Supprimer une matière :</label>
+        <select name="matiere" id="matiere" required>
+            {% for matiere in matieres %}
+                <option value="{{ matiere.nom }}">{{ matiere.nom }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" name="action" value="delete_matiere">Supprimer Matière</button>
+    </form>
+
+</body>
+</html>

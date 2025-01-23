@@ -1,0 +1,93 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.choice-list {
+    list-style-type: none;
+   
+    display: flex;
+    flex-wrap: nowrap; /* Ensure all choices stay on one line */
+    gap: 7px; /* Adjust the space between buttons */
+    overflow-x: auto; /* Allow horizontal scroll if necessary */
+}
+
+.choice-list li {
+    flex: 0 0 auto; /* Prevent items from growing or shrinking */
+}
+
+.choice-button {
+    display: inline-block;
+    padding: 8px 12px; /* Reduce padding to make buttons smaller */
+    margin: 2px; /* Adjust margin for compact spacing */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 0.9em; /* Slightly smaller text */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.choice-button:hover, .choice-button.selected {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.select, .textarea {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #f9f9f9;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #007bff;
+}
