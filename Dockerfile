@@ -10,6 +10,9 @@ COPY . /app
 # Installer les dépendances nécessaires
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Exécuter le script d'initialisation de la base de données
+RUN python init_db.py
+
 # Exposer le port sur lequel l'application fonctionnera
 EXPOSE 5000
 
