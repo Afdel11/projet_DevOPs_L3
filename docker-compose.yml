@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - "5004:5004"
+      - "5000:5000"
     volumes:
       - .:/app
       - db_data:/app/instance
