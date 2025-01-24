@@ -10,13 +10,13 @@ pipeline {
 
     stage("Construire les conteneurs a l'aide de Docker"){
       steps{
-        sh 'docker-compose build'
+        powershell 'docker-compose build'
       }
     }
 
     stage("Déployer l’application localement à l’aide de docker-compose"){
       steps{
-        sh 'docker-compose up -d'
+        powershell 'docker-compose up -d'
       }
     } 
   }
