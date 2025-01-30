@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Admin</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 </head>
-<body>
-    <form method="POST" action="{{ url_for('login') }}">
-        <h2>Connexion Administrateur</h2>
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" name="username" required>
-        <label for="password">Mot de passe:</label>
-        <input type="password" name="password" required>
-        <button type="submit">Se connecter</button>
-    </form>
+<body class="bg-gray-100">
+    <!-- Barre de navigation -->
+    <nav class="bg-blue-600 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Évaluation des Cours</h1>
+            <div>
+                <a href="{{ url_for('home') }}" class="mr-4">Acceuil</a>
+                <a href="{{ url_for('login') }}" class="mr-4">Inscription</a>
+                <a href="{{ url_for('admin') }}" class="mr-4">Administration</a>
+                <a href="{{ url_for('survey') }}" class="bg-green-500 px-4 py-2 rounded">Évaluer un Cours</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulaire de connexion admin -->
+    <div class="container mx-auto mt-10 flex justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg text-center w-full max-w-md">
+            <h2 class="text-3xl font-bold mb-4">Connexion Administrateur</h2>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Nom d'utilisateur</label>
+                    <input type="text" name="username" class="w-full p-2 border rounded" required aria-label="Nom d'utilisateur">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Mot de passe</label>
+                    <input type="password" name="password" class="w-full p-2 border rounded" required aria-label="Mot de passe">
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                    Se connecter
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

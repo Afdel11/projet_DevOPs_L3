@@ -2,106 +2,140 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapport Final</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        .table-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        th {
-            background-color: #f2f2f2;
+        .back-button {
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body>
-   <a href="{{ url_for('admin') }}">Retour</a>
-    <h1>Rapport d’évaluation {{ matiere_name }} - {{ classe_name }}</h1>
+<body class="bg-gray-50 min-h-screen p-6">
+    <div class="container mx-auto">
+        <!-- Bouton de retour -->
+        <a href="{{ url_for('admin') }}" class="back-button bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 inline-block mb-8">
+            Retour
+        </a>
 
-    <h3>1. Implication et Niveau de compétences des étudiants</h3>
-    <table>
-        <tr>
-            <th>Critère</th>
-            <th>Note Moyenne / 10</th>
-        </tr>
-        <tr>
-            <td>Niveau d'implication moyen</td>
-            <td>{{ avg_involvement }}</td>
-        </tr>
-        <tr>
-            <td>Niveau de compétences initiales moyen</td>
-            <td>{{ avg_initial_knowledge }}</td>
-        </tr>
-        <tr>
-            <td>Niveau de compétences actuel moyen</td>
-            <td>{{ avg_current_knowledge }}</td>
-        </tr>
-    </table>
+        <!-- Titre principal -->
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Rapport d’évaluation {{ matiere_name }} - {{ classe_name }}</h1>
 
-    <h3>2. Compétences du formateur</h3>
-    <table>
-        <tr>
-            <th>Critère</th>
-            <th>Note Moyenne / 10</th>
-        </tr>
-        <tr>
-            <td>Motivation et échanges avec le professeur</td>
-            <td>{{ avg_professor_motivation }}</td>
-        </tr>
-        <tr>
-            <td>Outils et méthodologies développés</td>
-            <td>{{ avg_tools_methodology }}</td>
-        </tr>
-        <tr>
-            <td>Exemples employés et exercices réalisés</td>
-            <td>{{ avg_examples_exercises }}</td>
-        </tr>
-        <tr>
-            <td>Pertinence et clarté des explications</td>
-            <td>{{ avg_explanations_clarity }}</td>
-        </tr>
-    </table>
+        <!-- Section 1 : Implication et Niveau de compétences des étudiants -->
+        <div class="table-container p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-blue-600">1. Implication et Niveau de compétences des étudiants</h3>
+            <table class="w-full">
+                <thead class="bg-blue-50">
+                    <tr>
+                        <th class="p-4 text-left text-gray-700 font-bold">Critère</th>
+                        <th class="p-4 text-left text-gray-700 font-bold">Note Moyenne / 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Niveau d'implication moyen</td>
+                        <td class="p-4 text-gray-700">{{ avg_involvement }}</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Niveau de compétences initiales moyen</td>
+                        <td class="p-4 text-gray-700">{{ avg_initial_knowledge }}</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Niveau de compétences actuel moyen</td>
+                        <td class="p-4 text-gray-700">{{ avg_current_knowledge }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <h3>3. Mesure de la capacité de mise en pratique des compétences acquises</h3>
-    
-    <table>
-        <tr>
-            <th>Critère</th>
-            <th>Pourcentage</th>
-        </tr>
-        <tr>
-            <td>Pourcentage des étudiants capables de mettre en pratique les compétences:</td>
-            <td>{{ (practical_skills_yes / responses_len) * 100 | round(2) }}%</td>
-        </tr>
+        <!-- Section 2 : Compétences du formateur -->
+        <div class="table-container p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-green-600">2. Compétences du formateur</h3>
+            <table class="w-full">
+                <thead class="bg-green-50">
+                    <tr>
+                        <th class="p-4 text-left text-gray-700 font-bold">Critère</th>
+                        <th class="p-4 text-left text-gray-700 font-bold">Note Moyenne / 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Motivation et échanges avec le professeur</td>
+                        <td class="p-4 text-gray-700">{{ avg_professor_motivation }}</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Outils et méthodologies développés</td>
+                        <td class="p-4 text-gray-700">{{ avg_tools_methodology }}</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Exemples employés et exercices réalisés</td>
+                        <td class="p-4 text-gray-700">{{ avg_examples_exercises }}</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Pertinence et clarté des explications</td>
+                        <td class="p-4 text-gray-700">{{ avg_explanations_clarity }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    </table>
+        <!-- Section 3 : Mesure de la capacité de mise en pratique des compétences acquises -->
+        <div class="table-container p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-purple-600">3. Mesure de la capacité de mise en pratique des compétences acquises</h3>
+            <table class="w-full">
+                <thead class="bg-purple-50">
+                    <tr>
+                        <th class="p-4 text-left text-gray-700 font-bold">Critère</th>
+                        <th class="p-4 text-left text-gray-700 font-bold">Pourcentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Pourcentage des étudiants capables de mettre en pratique les compétences</td>
+                        <td class="p-4 text-gray-700">{{ (practical_skills_yes / responses_len) * 100 | round(2) }}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <h3>4. Aspects du cours et Satisfaction générale</h3>
-    <table>
-        <tr>
-            <th>Critère</th>
-            <th>Note Moyenne / 10</th>
-        </tr>
-        <tr>
-            <td>Satisfaction avec l'organisation du cours</td>
-            <td>{{ (course_organization_yes/ responses_len)*10 | round(2) }}</td>
-        </tr>
-        <tr>
-            <td>Satisfaction générale moyenne</td>
-            <td>{{ avg_satisfaction_general }}</td>
-        </tr>
-    </table>
-
-    
+        <!-- Section 4 : Aspects du cours et Satisfaction générale -->
+        <div class="table-container p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4 text-red-600">4. Aspects du cours et Satisfaction générale</h3>
+            <table class="w-full">
+                <thead class="bg-red-50">
+                    <tr>
+                        <th class="p-4 text-left text-gray-700 font-bold">Critère</th>
+                        <th class="p-4 text-left text-gray-700 font-bold">Note Moyenne / 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Satisfaction avec l'organisation du cours</td>
+                        <td class="p-4 text-gray-700">{{ (course_organization_yes / responses_len) * 10 | round(2) }}</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">Satisfaction générale moyenne</td>
+                        <td class="p-4 text-gray-700">{{ avg_satisfaction_general }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
-

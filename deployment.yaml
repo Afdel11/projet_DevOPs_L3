@@ -1,0 +1,85 @@
+# Déploiement de l'application web
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: web-app
+        image: afdelk/projet_devops_l3-web:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: sqlite-db
+          value: "sqlite:///app/data/site.db"
+        volumeMounts:
+        - name: sqlite-data
+          mountPath: /app/data
+      volumes:
+      - name: sqlite-data
+        emptyDir: {}
+
+---
+# Service pour l'application web
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-service
+spec:
+  selector:
+    app: web-app
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
+
+---
+# Déploiement de la base de données SQLite
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: busybox
+        command: ["sleep", "infinity"]
+        volumeMounts:
+        - name: db-storage
+          mountPath: /data
+      volumes:
+      - name: db-storage
+        emptyDir: {}
+
+---
+# Service pour la base de données
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+spec:
+  selector:
+    app: db
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306

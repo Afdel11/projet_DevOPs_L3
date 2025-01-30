@@ -5,6 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Form</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.choice-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 0;
+}
+
+.choice-list li {
+    list-style: none;
+}
+
+.choice-button {
+    background: #e0e7ff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.choice-button:hover {
+    background: #c7d2fe;
+}
+
+.choice-button.selected {
+    background: #6366f1;
+    color: white;
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+.select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f8f9fc;
+    font-size: 1rem;
+}
+
+.textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #f8f9fc;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.submit-button {
+    width: 100%;
+    background: #6366f1;
+    color: white;
+    padding: 12px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+}
+
+    </style>
 </head>
 <body>
     <div class="container">

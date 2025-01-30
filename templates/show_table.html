@@ -2,112 +2,84 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réponses au Sondage</title>
-    
-    <link rel="stylesheet" href="nav.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 20px;
-            padding: 20px;
+            background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
         }
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
+        .table-row:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        form {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        select {
-            padding: 5px;
-            font-size: 16px;
-        }
-        button {
-            padding: 5px 15px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-left: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        tr:hover {
-            background-color: #f9f9f9;
+        .reset-button:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen p-6">
+    <!-- Barre de navigation -->
+    <nav class="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white mb-8 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Réponses au Sondage</h1>
+            <a href="{{ url_for('admin') }}" class="bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700 transition transform hover:scale-105">
+                Retour
+            </a>
+        </div>
+    </nav>
 
-    
-    <a href="{{ url_for('admin') }}">Retour</a>
-    <h1>Réponses au Sondage</h1>
+    <!-- Conteneur principal -->
+    <div class="container mx-auto bg-white rounded-xl shadow-2xl p-8">
+        <!-- Formulaire de filtre -->
+        <div class="mb-8 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg shadow-md">
+            <form method="GET" action="{{ url_for('show_table') }}" class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <label for="class_name" class="text-lg font-semibold text-gray-700">Filtrer par classe :</label>
+                <select name="class_name" id="class_name" class="p-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition w-full md:w-auto">
+                    <option value="">Toutes les classes</option>
+                    {% for classe in classes %}
+                        <option value="{{ classe.nom }}">{{ classe.nom }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition transform hover:scale-105">
+                    Filtrer
+                </button>
+            </form>
+        </div>
 
-    <!-- Formulaire pour filtrer par classe -->
-    <form method="GET" action="{{ url_for('show_table') }}">
-        <label for="class_name">Filtrer par classe:</label>
-        <select name="class_name" id="class_name">
-            <option value="">Toutes les classes</option>
-            <option value="Licence 1">Licence 1</option>
-            <option value="Licence 2">Licence 2</option>
-            <option value="Licence 3">Licence 3</option>
-            <option value="Master 1">Master 1</option>
-            <option value="Master 2">Master 2</option>
-            <!-- Ajoutez d'autres options pour vos classes -->
-        </select>
-        <button type="submit">Filtrer</button>
-    </form>
+        <!-- Tableau des réponses -->
+        <div class="overflow-x-auto rounded-lg shadow-lg">
+            <table class="w-full bg-white">
+                <thead class="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                    <tr>
+                        <th class="p-4 text-left font-bold">Classe</th>
+                        <th class="p-4 text-left font-bold">Matière</th>
+                        <th class="p-4 text-left font-bold">Commentaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for response in survey_responses %}
+                    <tr class="table-row border-b border-gray-200 hover:bg-gray-50">
+                        <td class="p-4 text-gray-700">{{ response.class_name }}</td>
+                        <td class="p-4 text-gray-700">{{ response.subject_name }}</td>
+                        <td class="p-4 text-gray-700">{{ response.feedback }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Tableau pour afficher les réponses -->
-    <table>
-        <thead>
-            <tr>
-                <th>Classe</th>
-                <th>Matière</th>
-                <th>Commentaire</th>
-                <!-- Ajoutez d'autres colonnes si nécessaire -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for response in survey_responses %}
-            <tr>
-                <td>{{ response.class_name }}</td>
-                <td>{{ response.subject_name }}</td>
-                <td>{{ response.feedback }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <form action="{{ url_for('reset_survey_responses') }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir réinitialiser tous les résultats ? Cette action est irréversible.')">
-        <button style="background-color: red;" type="submit">Réinitialiser les Résultats</button>
-    </form>
+        <!-- Bouton de réinitialisation -->
+        <div class="mt-8 text-center">
+            <form action="{{ url_for('reset_survey_responses') }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir réinitialiser tous les résultats ? Cette action est irréversible.')">
+                <button type="submit" class="reset-button bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition transform hover:scale-105">
+                    Réinitialiser les Résultats
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
