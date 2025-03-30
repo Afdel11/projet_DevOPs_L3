@@ -22,26 +22,3 @@ graph TD
     A --> C[Frontend HTML/Tailwind]  
     D[Jenkins CI/CD] --> E[Docker Containers]  
     E --> F[Kubernetes Cluster]  
-
-
-## 🚀 Déploiement
-Conteneurisation :
-
-bash
-Copy
-docker-compose up -d --build  
-Kubernetes :
-
-bash
-Copy
-kubectl apply -f deployment.yaml  
-📸 Captures d'Écran
-Interface Étudiant	Dashboard Admin
-Student	Admin
-📌 Perspectives
-Intégration d'analyses IA (NLP pour les commentaires).
-
-Portail dédié aux enseignants.
-
-🙏 Remerciements
-Équipe pédagogique du DIT et encadrant M. Madické Diop.
