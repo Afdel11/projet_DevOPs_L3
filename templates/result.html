@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .result-message {
+            text-align: center;
+            font-size: 3em;
+            font-weight: bold;
+            color: #007bff;
+            animation: fadeInZoom 3s ease-out, pulse 1.5s infinite;
+        }
+
+        @keyframes fadeInZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                color: #4CAF50;
+            }
+            50% {
+                transform: scale(1.1);
+                color: #4CAF50;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-message">
+        Merci
+    </div>
+</body>
+</html>
